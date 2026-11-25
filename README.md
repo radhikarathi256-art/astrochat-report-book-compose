@@ -59,13 +59,16 @@ Pass `animate = false` to `ReportBookOpenHero` to skip the opening (e.g. returni
 
 | `BookSize` | Size | Block depth |
 |---|---|---|
-| Tile | 42 × 56 | 8 |
-| Upsell | 58 × 84 | 11 |
-| ChatWidget | 61 × 89 | 12 |
-| Standing | 86 × 114 | 16 |
+| Tile | 42 × 63 | 9 |
+| Upsell | 58 × 87 | 12 |
+| ChatWidget | 61 × 91 | 13 |
+| Standing | 86 × 129 | 18 |
 
-`depth` ≈ width × 0.19 at every size, so after the 22° turn (`× sin 22°`) the cream fore-edge
-lands at **7.25% of the face width** — measured off the reference 3D render.
+Every face is **2:3**, the aspect the cover art is drawn at in Figma. Anything else and
+`ContentScale.Crop` eats the title block off the top and bottom.
+
+`depth` ≈ width × 0.21 at every size, so after the 26° turn the ivory fore-edge lands at
+**~10% of the face width**.
 
 Hero spread: 183 × 122 (page 91.5 × 122) — override with `pageWidth` / `pageHeight`.
 
@@ -75,8 +78,8 @@ Measured off the reference 3D book render (book 414px wide):
 
 | Part | Value | Why it reads as a hardcover |
 |---|---|---|
-| Page block (fore-edge) | 7.25% of width, cream + 0.5dp leaf lines | Thickness you can count pages in |
-| Board rim past the pages | 0.9% of width, back-board colour | Boards are bigger than the text block — a case, not a card |
+| Page block (fore-edge) | ~10% of width, warm ivory, bowed, with a lit top plane and a shaded bottom edge | A stack of paper with volume, not a white strip |
+| Board rim past the pages | 2.0% of width, back-board colour | Boards are bigger than the text block — a case, not a card |
 | Squares (head & tail) | 1.6% of height each | Same, top and bottom |
 | Cover board thickness | 2.2% of width, lit bevel → dark terminal edge | The board has a side |
 | Spine groove | inside the first 4.6%: dark 30% → white ridge 22% → flat | Stiff board hinged on cloth. Deepens to 52% as the cover lifts |
@@ -113,4 +116,5 @@ the 19 Nov set.
 Spreads are cropped to the book's own outer edges (the Figma frames carry a transparent margin),
 so `drawSpreadHalf` can split them down the gutter and stretch each half onto a page.
 
-Not compiled here (no Android SDK in the sandbox) — open `ReportBookPreviews.kt` in Android Studio to check.
+Built and checked on a device (compileSdk 35, Compose BOM 2024.10.01). Open `ReportBookPreviews.kt`
+in Android Studio to see every book and size.
